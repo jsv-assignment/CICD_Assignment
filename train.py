@@ -14,5 +14,5 @@ model = LogisticRegression().fit(X, y)
 
 with open("model.pkl", 'wb') as f:
     pickle.dump(model, f)
-print('done111111111111')
+print('done1111111111112222222222')
 
