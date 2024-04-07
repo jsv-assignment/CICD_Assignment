@@ -1,0 +1,40 @@
+name: Action 1 - Build and Train Docker Pipeline
+
+on :
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore:
+      - 'data/**'
+      - 'requirements.txt'
+      - 'README.md'
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    env:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/login-action@v2
+        with:
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: |
+          docker build -t buld:latest .
+          docker tag buid:latest ${{ env.DOCKER_USERNAME }}/build:latest
+          docker push ${{ env.DOCKER_USERNAME }}/build:latest
+
+          
