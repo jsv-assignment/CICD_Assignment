@@ -28,8 +28,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t buld:latest .
-          docker tag buid:latest ${{ env.DOCKER_USERNAME }}/build:latest
-          docker push ${{ env.DOCKER_USERNAME }}/build:latest
+          docker build -t build1:latest .
+          docker tag buid:latest ${{ env.DOCKER_USERNAME }}/build1:latest
+          docker push ${{ env.DOCKER_USERNAME }}/build1:latest
 
           
