@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
-from xgboost import XGBClassifier
+from sklearn.ensemble import GradientBoostingClassifier
 import pickle
 import numpy as np
 
@@ -12,9 +12,9 @@ y = df['Disease'].to_numpy()
 labels = np.sort(np.unique(y))
 y = np.array([np.where(labels == x) for x in y]).flatten()
 
-# Running XGBoost instead of Logistic Regression to improve the accuracy
+# Running GradientBoostingClassifier instead of Logistic Regression to improve the accuracy
 #model = LogisticRegression().fit(X, y)
-model = xgb.XGBClassifier().fit(X, y)
+model = GradientBoostingClassifier().fit(X, y)
 
 
 with open("model.pkl", 'wb') as f:
