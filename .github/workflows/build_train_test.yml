@@ -1,4 +1,4 @@
-name: Action 1 Build and Train Docker Pipeline
+name: Docker Pipeline
 
 on :
   pull_request:
