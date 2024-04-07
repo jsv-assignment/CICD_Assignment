@@ -4,8 +4,6 @@ from sklearn.ensemble import GradientBoostingClassifier
 import pickle
 import numpy as np
 
-import xgboost as xgb
-
 df = pd.read_csv("data/train.csv")
 X = df.drop(columns=['Disease']).to_numpy()
 y = df['Disease'].to_numpy()
