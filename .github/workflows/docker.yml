@@ -32,5 +32,24 @@ jobs:
         run: |
           echo "Build job completed successfully"
           exit 0
+  Test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: train
+    steps:
+      - name: Pull Docker image from Docker Hub
+        run: docker pull ${{ secrets.DOCKER_USERNAME }}/cicd-assignment:latest
 
-          
+      - name: Run Docker Image Check Score
+        run: |
+          # Run the docker image and evaluate if threshold is met
+          score=$(docker run ${{ secrets.DOCKER_USERNAME }}/cicd-assignment:latest)
+          echo "Score: $score"
+          if (( $(echo "$score > 0.45" | bc -l) )); then
+            echo "Sufficient Accuracy : Test pass"
+            exit 0
+          else
+            echo "Insufficient Accuracy : Test fail"
+            exit 1
+          fi
+
