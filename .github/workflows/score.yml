@@ -7,10 +7,6 @@ on :
       - 'data/**'
       - 'requirements.txt'
       - 'README.md'
-     steps: 
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v5.3.0
-            
 
 permissions:
   contents: read
